@@ -1,0 +1,22 @@
+<!doctype html>
+<html ng-app="marvelApp">
+<head>
+  <script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="credentials.js"></script>
+  <script type="text/javascript" src="marvel.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+  <div ng-controller="MarvelController as marvel">
+    <input type="text" ng-model="marvel.searchTerm" placeholder="Search term">
+    <button ng-click="marvel.search()">Search</button>
+    <ul ng-repeat="result in marvel.searchResults">
+      <li>{{result}}</li>
+    </ul>
+  </div>
+</body>
+</html>
