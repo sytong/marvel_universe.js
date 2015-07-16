@@ -23,3 +23,15 @@ factory('MyCredentials', function() {
 ```
 
 You need to fill in the private key and public key from your Marvel account into the `private_key` and `public_key` variables respectively.
+
+## Usage
+TBA
+
+## Development
+TBA
+
+## License
+
+marvel_universe.js is provided under the terms of the MIT license.
+
+Copyright &copy; 2015, Willie Tong. All rights reserved. Please see the {file:LICENSE} file for further details.
