@@ -4,7 +4,7 @@ Build an AngularJS application with the Marvel Developer API
 ## Preparations
 To use this application, please register an account at [Marvel Developer Portal](http://developer.marvel.com/).
 You will need to create a `MyCredentials` module to handle the authentication.
-Please clone this repository and then create `credentials.js` in the project directory using the following template:
+Please clone this repository and then create `credentials.js` in the project directory `app/js` using the following template:
 
 ```javascript
 angular.module("marvelApp.credentials", []).
