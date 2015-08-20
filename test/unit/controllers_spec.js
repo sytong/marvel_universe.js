@@ -1,33 +1,19 @@
 'use strict';
 
-/* mocked credentials module */
-angular.module('mock.credentials', []).
-  factory('MyCredentials', function(ts) {
-    var myCrednentials = {};
-
-    myCredentials.generate = function(timestamp) {
-      // dummy default params
-      return "a=b";
-    };
-
-    return myCredentials;
-  });
-
 /* jasmine specs for controllers */
-describe('Marvel controllers', function() {
-  var scope, ctrl, $httpBackend, mock_credentials
+describe('MarvelController', function() {
+  var scope, ctrl, $httpBackend, mock_credentials;
   
-  beforeEach(module('mock.credentials'));
+  beforeEach(module('marvelApp'));
 
-  beforeEach(inject(function(_$httpBackend_, $rootScope, _MyCredentials_) {
+  beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, _MyCredentials_) {
     scope = $rootScope.$new();
-    scope.base_url = "http://localhost:1234/test/"
+    scope.marvel = {};
 
     mock_credentials = _MyCredentials_;
 
-    var base_path = scope.base_url + "?" + mock_credentials.generate();
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET(base_path + "&nameStartsWith=Hulk").
+    $httpBackend.expectGET("http://localhost:1234/test/?a=b&nameStartsWith=Hulk").
       respond(
         {'data': 
           {'results': [{'id': 1, 'name': 'Hulk', 'description': 'Bruce Banner'}]}
@@ -36,14 +22,16 @@ describe('Marvel controllers', function() {
 
     ctrl = $controller('MarvelController', {
       $scope: scope,
-      MyCredentials: _MyCredentials_
+      'MyCredentials': _MyCredentials_
     });
   }));
 
   it('should get me the Hulk', function() {
+    spyOn(mock_credentials, "generate").and.returnValue("a=b");
+    scope.marvel.searchTerm = 'Hulk';
+    scope.marvel.base_url = "http://localhost:1234/test/";
+    scope.marvel.search();
     $httpBackend.flush();
-    expect(scope.marvel.searchResults).toBe('Hulk: Bruce Banner');
+    expect(scope.marvel.searchResults[0]).toBe('Hulk: Bruce Banner');
   });
-
-
 });
