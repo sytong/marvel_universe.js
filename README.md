@@ -15,7 +15,7 @@ factory('MyCredentials', function() {
       var private_key = "YOUR_MARVEL_DEVELOPER_PRIVATE_KEY";
       var public_key = "YOUR_MARVEL_DEVELOPER_PUBLIC_KEY";
       var hash = CryptoJS.MD5(timestamp + private_key + public_key);
-      return "ts=" + timestamp + "&apikey=" + public_key + "&hash=" + hash;
+      return {ts: timestamp,  apikey: public_key, hash: hash.toString()};
     }
   };
 });
