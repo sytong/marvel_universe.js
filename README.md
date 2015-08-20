@@ -10,13 +10,12 @@ Please clone this repository and then create `credentials.js` in the project dir
 angular.module("marvelApp.credentials", []).
 factory('MyCredentials', function() {
   return {
-    generate: function(timestamp) {
+    generate: function() {
+      var timestamp = new Date().getTime();
       var private_key = "YOUR_MARVEL_DEVELOPER_PRIVATE_KEY";
       var public_key = "YOUR_MARVEL_DEVELOPER_PUBLIC_KEY";
-      return {
-        "public_key": public_key,
-        "hash": CryptoJS.MD5(timestamp + private_key + public_key)
-      };
+      var hash = CryptoJS.MD5(timestamp + private_key + public_key);
+      return "ts=" + timestamp + "&apikey=" + public_key + "&hash=" + hash;
     }
   };
 });
