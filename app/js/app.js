@@ -1,1 +1,1 @@
-angular.module('marvelApp', ["marvelApp.credentials", "marvelApp.controllers"]);
+angular.module('marvelApp', ["marvelApp.credentials", "marvelApp.controllers", "marvelApp.apiServices"]);
